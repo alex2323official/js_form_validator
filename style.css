@@ -134,3 +134,7 @@ button {
 #successFormSubmit {
   color: green;
 }
+
+.inputError {
+  color: red;
+}
