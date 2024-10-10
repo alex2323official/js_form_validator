@@ -10,9 +10,16 @@ class FormValidator {
   #errorDisplaySpan = document.querySelector("#errorDisplay");
 
   controllerUserFormInput() {
-    this.#form.addEventListener("input", (event) => {
-      if (this.#emailInput.validity.valueMissing) {
-        this.#errorDisplaySpan.textContent = `You need provide proper e-mail. Field can't be empty.`;
+    this.#form.addEventListener("focusout", (event) => {
+      switch (true) {
+        case this.#emailInput.validity.valueMissing:
+          this.#errorDisplaySpan.textContent = `E-mail field can't be empty.`;
+          break;
+        case this.#emailInput.validity.typeMismatch:
+          this.#errorDisplaySpan.textContent = `You nedd to provide a proper e-mail format.`;
+          break;
+        default:
+          this.#errorDisplaySpan.textContent = "";
       }
     });
   }
