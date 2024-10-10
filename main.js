@@ -35,21 +35,31 @@ class FormValidator {
           break;
         default:
           this.#errorEmail.textContent = "";
+          this.#emailInput.setCustomValidity("");
           emailValid = true;
       }
     });
 
     // Country validation
     this.#countryInput.addEventListener("focusout", (event) => {
+      const regexTestForNumbers = /\d/; // \d matches any digit (0-9)
+
       switch (true) {
         case this.#countryInput.validity.valueMissing:
           this.#errorCountry.textContent = `Country field can't be empty.`;
           break;
         case this.#countryInput.validity.typeMismatch:
-          this.#errorCountry.textContent = `You nedd to provide a aproper e-mail format.`;
+          this.#errorCountry.textContent = `You nedd to provide a aproper country format.`;
+          break;
+        case regexTestForNumbers.test(this.#countryInput.value):
+          this.#errorCountry.textContent = `Country field can not contain any numbers.`;
+          this.#countryInput.setCustomValidity(
+            "Wrong - trigger :invalid class on element"
+          );
           break;
         default:
           this.#errorCountry.textContent = "";
+          this.#countryInput.setCustomValidity("");
           countryValid = true;
       }
     });

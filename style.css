@@ -116,12 +116,6 @@ button {
   padding: 1rem;
 }
 
-#errorDisplay {
-  width: 500px;
-  font-size: 1.4rem;
-  color: red;
-}
-
 .submit-container {
   display: flex;
   flex-direction: column;
