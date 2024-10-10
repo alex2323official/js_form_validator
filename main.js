@@ -7,19 +7,24 @@ class FormValidator {
   #zipcodeInput = document.querySelector("#zipCode");
   #passwordInput = document.querySelector("#password");
   #confirmPasswordInput = document.querySelector("#confirmPassword");
-  #errorDisplaySpan = document.querySelector("#errorDisplay");
+  #errorEmail = document.querySelector("#errorEmail");
+  #errorCountry = document.querySelector("#errorCountry");
+  #errorZipcode = document.querySelector("#errorZipcode");
+  #errorPassword = document.querySelector("#errorPassword");
+  #errorConfirmPassword = document.querySelector("#errorConfirmPassword");
 
   controllerUserFormInput() {
     this.#form.addEventListener("focusout", (event) => {
+      // Email validation
       switch (true) {
         case this.#emailInput.validity.valueMissing:
-          this.#errorDisplaySpan.textContent = `E-mail field can't be empty.`;
+          this.#errorEmail.textContent = `E-mail field can't be empty.`;
           break;
         case this.#emailInput.validity.typeMismatch:
-          this.#errorDisplaySpan.textContent = `You nedd to provide a proper e-mail format.`;
+          this.#errorEmail.textContent = `You nedd to provide a aproper e-mail format.`;
           break;
         default:
-          this.#errorDisplaySpan.textContent = "";
+          this.#errorEmail.textContent = "";
       }
     });
   }
