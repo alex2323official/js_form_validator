@@ -23,6 +23,7 @@ class FormValidator {
     let zipcodeValid = false;
     let passwordValid = false;
     let confirmPasswordValid = false;
+    let passwordsAreSame = false;
 
     // Email validation
     this.#emailInput.addEventListener("focusout", (event) => {
@@ -88,18 +89,42 @@ class FormValidator {
         default:
           this.#errorZipcode.textContent = "";
           this.#zipcodeInput.setCustomValidity("");
-          emailValid = true;
+          zipcodeValid = true;
+      }
+    });
+
+    // Simple Password validation
+    this.#passwordInput.addEventListener("focusout", (event) => {
+      switch (true) {
+        case this.#passwordInput.validity.valueMissing:
+          this.#errorPassword.textContent = `Password field can't be empty.`;
+          break;
+        case this.#passwordInput.validity.typeMismatch:
+          this.#errorPassword.textContent = `You nedd to provide a aproper password format.`;
+          break;
+        default:
+          this.#errorPassword.textContent = "";
+          this.#passwordInput.setCustomValidity("");
+          passwordValid = true;
       }
     });
 
     // FINAL VALIDATION CHECK AND FORM SUBMIT
     this.#submitBtn.addEventListener("click", (e) => {
+      if (this.#passwordInput.value === this.#confirmPasswordInput.value) {
+        confirmPasswordValid = true;
+        passwordsAreSame = true;
+      } else {
+        passwordsAreSame = false;
+      }
+
       if (
         emailValid &&
         countryValid &&
         zipcodeValid &&
         passwordValid &&
-        confirmPasswordValid
+        confirmPasswordValid &&
+        passwordsAreSame
       ) {
         // Clear Submit Error
         this.#errorFormSubmit.textContent = "";
