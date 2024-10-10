@@ -71,6 +71,27 @@ class FormValidator {
       }
     });
 
+    // Zip Code validation
+    this.#zipcodeInput.addEventListener("focusout", (event) => {
+      const regexZipcodeFormatCheck = /^\d{2}-\d{3}$/;
+
+      switch (true) {
+        case this.#zipcodeInput.validity.valueMissing:
+          this.#errorZipcode.textContent = `Zip Code field can't be empty.`;
+          break;
+        case !regexZipcodeFormatCheck.test(this.#zipcodeInput.value):
+          this.#errorZipcode.textContent = `You nedd to provide a proper Zip Code format (xx-xxx).`;
+          this.#zipcodeInput.setCustomValidity(
+            "Wrong - trigger :invalid class on element"
+          );
+          break;
+        default:
+          this.#errorZipcode.textContent = "";
+          this.#zipcodeInput.setCustomValidity("");
+          emailValid = true;
+      }
+    });
+
     // FINAL VALIDATION CHECK AND FORM SUBMIT
     this.#submitBtn.addEventListener("click", (e) => {
       if (
