@@ -12,10 +12,20 @@ class FormValidator {
   #errorZipcode = document.querySelector("#errorZipcode");
   #errorPassword = document.querySelector("#errorPassword");
   #errorConfirmPassword = document.querySelector("#errorConfirmPassword");
+  #submitBtn = document.querySelector("#button");
+  #errorFormSubmit = document.querySelector("#errorFormSubmit");
+  #successFormSubmit = document.querySelector("#successFormSubmit");
 
   controllerUserFormInput() {
-    this.#form.addEventListener("focusout", (event) => {
-      // Email validation
+    // Check if field is correct
+    let emailValid = false;
+    let countryValid = false;
+    let zipcodeValid = false;
+    let passwordValid = false;
+    let confirmPasswordValid = false;
+
+    // Email validation
+    this.#emailInput.addEventListener("focusout", (event) => {
       switch (true) {
         case this.#emailInput.validity.valueMissing:
           this.#errorEmail.textContent = `E-mail field can't be empty.`;
@@ -25,6 +35,44 @@ class FormValidator {
           break;
         default:
           this.#errorEmail.textContent = "";
+          emailValid = true;
+      }
+    });
+
+    // Country validation
+    this.#countryInput.addEventListener("focusout", (event) => {
+      switch (true) {
+        case this.#countryInput.validity.valueMissing:
+          this.#errorCountry.textContent = `Country field can't be empty.`;
+          break;
+        case this.#countryInput.validity.typeMismatch:
+          this.#errorCountry.textContent = `You nedd to provide a aproper e-mail format.`;
+          break;
+        default:
+          this.#errorCountry.textContent = "";
+          countryValid = true;
+      }
+    });
+
+    // FINAL VALIDATION CHECK AND FORM SUBMIT
+    this.#submitBtn.addEventListener("click", (e) => {
+      if (
+        emailValid &&
+        countryValid &&
+        zipcodeValid &&
+        passwordValid &&
+        confirmPasswordValid
+      ) {
+        // Clear Submit Error
+        this.#errorFormSubmit.textContent = "";
+        // Success message
+        this.#successFormSubmit.textContent =
+          "Form Submited! You are awesome <3!";
+      } else {
+        // Clear Submit Success
+        this.#successFormSubmit.textContent = "";
+        this.#errorFormSubmit.textContent =
+          "You need to have all fields valid to submit this form!";
       }
     });
   }

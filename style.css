@@ -121,3 +121,16 @@ button {
   font-size: 1.4rem;
   color: red;
 }
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#errorFormSubmit {
+  color: red;
+}
+
+#successFormSubmit {
+  color: green;
+}

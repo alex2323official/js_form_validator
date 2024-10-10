@@ -23,6 +23,7 @@
         id="country"
         placeholder="Country"
       />
+      <span id="errorCountry"></span>
       <input
         type="text"
         name="zipCode"
@@ -30,6 +31,7 @@
         placeholder="Zip Code format xx-xxx"
         required
       />
+      <span id="errorZipcode"></span>
       <input
         type="password"
         name="password"
@@ -37,6 +39,7 @@
         placeholder="Password"
         required
       />
+      <span id="errorPassword"></span>
       <input
         type="password"
         name="confirmPassword"
@@ -44,9 +47,15 @@
         placeholder="Confirm Password"
         required
       />
+      <span id="errorConfirmPassword"></span>
     </form>
 
-    <button type="button">Send</button>
+    <div class="submit-container">
+      <button id="button" type="button">Send</button>
+      <span id="errorFormSubmit"></span>
+      <span id="successFormSubmit"></span>
+    </div>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>
