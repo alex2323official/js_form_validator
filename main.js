@@ -11,7 +11,9 @@ class FormValidator {
 
   controllerUserFormInput() {
     this.#form.addEventListener("input", (event) => {
-      console.log(event);
+      if (this.#emailInput.validity.valueMissing) {
+        this.#errorDisplaySpan.textContent = `You need provide proper e-mail. Field can't be empty.`;
+      }
     });
   }
 }
