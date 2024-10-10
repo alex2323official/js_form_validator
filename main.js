@@ -43,6 +43,7 @@ class FormValidator {
     // Country validation
     this.#countryInput.addEventListener("focusout", (event) => {
       const regexTestForNumbers = /\d/; // \d matches any digit (0-9)
+      const regexNoNoCharacters = /[^a-zA-Z0-9]/; // \d matches any digit (0-9)
 
       switch (true) {
         case this.#countryInput.validity.valueMissing:
@@ -53,6 +54,12 @@ class FormValidator {
           break;
         case regexTestForNumbers.test(this.#countryInput.value):
           this.#errorCountry.textContent = `Country field can not contain any numbers.`;
+          this.#countryInput.setCustomValidity(
+            "Wrong - trigger :invalid class on element"
+          );
+          break;
+        case regexNoNoCharacters.test(this.#countryInput.value):
+          this.#errorCountry.textContent = `Country field can not contain other characters than letters.`;
           this.#countryInput.setCustomValidity(
             "Wrong - trigger :invalid class on element"
           );
